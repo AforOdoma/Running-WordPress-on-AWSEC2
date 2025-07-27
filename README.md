@@ -151,3 +151,51 @@ sudo systemctl restart apache2
 
 ✅ Step 6: Try Again in WordPress
 Go to your WordPress dashboard, and try to install a plugin or theme. The FTP prompt should be gone now.
+
+# Before you migrate local wordpress to your domain server make sure the curl extension is installed on your server.
+
+The curl extension is not detected. Please install the extension first.
+![alt text](image-1.png)
+ChatGPT said:
+That error usually happens when PHP’s cURL extension is not installed or enabled on your server. Here’s how to fix it depending on your environment:
+
+✅ Check if cURL is installed
+Run:
+
+bash
+Copy
+Edit
+php -m | grep curl
+If nothing is returned, it means cURL is not enabled.
+
+✅ Install and enable cURL extension
+For Ubuntu/Debian (Apache or Nginx)
+bash
+Copy
+Edit
+sudo apt update
+sudo apt install php-curl
+sudo systemctl restart apache2 # For Apache
+
+# OR
+
+sudo systemctl restart php8.1-fpm # If using PHP-FPM (adjust version)
+For CentOS/RHEL
+bash
+Copy
+Edit
+sudo yum install php-curl
+sudo systemctl restart httpd
+✅ Verify Installation
+Run:
+
+bash
+Copy
+Edit
+php -i | grep -i curl
+You should see something like:
+
+java
+Copy
+Edit
+cURL support => enabled
